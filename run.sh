@@ -15,5 +15,6 @@
 # Do not change the default output folder name (reposense-report)
 ## Examples of other valid options; For more, please view the user guide
 ### java -jar RepoSense.jar --repos https://github.com/reposense/RepoSense.git
+export REPOSENSE_GITHUB_TOKEN=$REPOSENSE_GITHUB_TOKEN
 
 java -jar RepoSense.jar --config ./config
