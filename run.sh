@@ -1,20 +1,13 @@
 #!/bin/bash
 
-# Downloads a specific version of RepoSense.jar of your choice from our repository
-## Examples of supported options:
-### ./get-reposense.py --release               # Gets the latest release (Stable)
-### ./get-reposense.py --master                # Gets the latest master (Beta)
-### ./get-reposense.py --tag v1.6.1            # Gets a specific version
-### ./get-reposense.py --latest v1.6           # Gets the latest version with the given tag prefix e.g. v1.6.1
-### ./get-reposense.py --commit abc123         # Gets a specific commit
-### ./get-reposense.py --release --overwrite   # Overwrite RepoSense.jar, if exists, with the latest release
-
+# Download RepoSense release
 ./get-reposense.py --release
 
-# Executes RepoSense
-# Do not change the default output folder name (reposense-report)
-## Examples of other valid options; For more, please view the user guide
-### java -jar RepoSense.jar --repos https://github.com/reposense/RepoSense.git
+# Export token for internal use (optional but okay to keep)
 export REPOSENSE_GITHUB_TOKEN=$REPOSENSE_GITHUB_TOKEN
 
-java -jar RepoSense.jar --config ./config
+# Set up Git credentials using token
+echo "machine github.com login $REPOSENSE_GITHUB_TOKEN password x-oauth-basic" > ~/.netrc
+
+# Run RepoSense with config
+java -jar RepoSense.jar --config ./config --output ./reposense-report
